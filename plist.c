@@ -14,7 +14,7 @@
  *                                                                            *
  *      void PlistDestroy(PLIST plist);                                       *
  *                                                                            *
- *      void PlistDump(PLIST plist);                                          *
+ *      void PlistDump(PLIST plist, FILE *output);                            *
  *                                                                            *
 \******************************************************************************/
 
@@ -74,8 +74,6 @@ PlistCreate(void)
 
     if (plist == NULL)
         error("Out of memory.");
-
-    plist = NULL;
 
     return (PLIST) plist;
 }
