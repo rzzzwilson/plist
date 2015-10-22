@@ -66,11 +66,10 @@ void test_insert1(void)
     CU_ASSERT(my_plist != NULL);
 
     PListInsert(my_plist, "abc", "abc-value");
-    PlistDump(my_plist, NULL);
 }
 
 /*
- * Simple test of PListFind().
+ * Simple test of PListFind() finding an entry.
  */
 void test_find1(void)
 {
@@ -84,6 +83,43 @@ void test_find1(void)
     char *value = NULL;
     value = PlistFind(my_plist, "abc");
     CU_ASSERT(value != NULL);
+}
+
+/*
+ * Simple test of PListFind() NOT finding an entry.
+ */
+void test_find2(void)
+{
+    PLIST my_plist = NULL;
+
+    my_plist = PlistCreate();
+    CU_ASSERT(my_plist != NULL);
+
+    PListInsert(my_plist, "abc", "abc-value");
+
+    char *value = NULL;
+    value = PlistFind(my_plist, "xyz");
+    CU_ASSERT(value == NULL);
+}
+
+/*
+ * Simple test of PListFind() finding first of multiple entries.
+ */
+void test_find3(void)
+{
+    PLIST my_plist = NULL;
+
+    my_plist = PlistCreate();
+    CU_ASSERT(my_plist != NULL);
+
+    PListInsert(my_plist, "abc", "abc-value");
+    PListInsert(my_plist, "abc", "abc2-value");
+    PListInsert(my_plist, "abc", "abc3-value");
+
+    char *value = NULL;
+    value = PlistFind(my_plist, "abc");
+    CU_ASSERT(value != NULL);
+    CU_ASSERT(strcmp(value, "abc3-value") == 0);
 }
 
 /*
@@ -145,7 +181,19 @@ int main()
     }
 
     /* add the tests to the suite */
-    if ((NULL == CU_add_test(find_suite, "test PlistFind", test_find1)))
+    if ((NULL == CU_add_test(find_suite, "test PlistFind finding", test_find1)))
+    {
+        CU_cleanup_registry();
+        return CU_get_error();
+    }
+
+    if ((NULL == CU_add_test(find_suite, "test PlistFind finding", test_find1)))
+    {
+        CU_cleanup_registry();
+        return CU_get_error();
+    }
+
+    if ((NULL == CU_add_test(find_suite, "test PlistFind multiple", test_find3)))
     {
         CU_cleanup_registry();
         return CU_get_error();

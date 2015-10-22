@@ -25,7 +25,7 @@ typedef void *PLIST;
 PLIST PlistCreate(void);
 void PListInsert(PLIST plist, char *name, char *value);
 char *PlistFind(PLIST plist, char *name);
-void PlistDestroy(PLIST plist);
+PLIST PlistDestroy(PLIST plist);
 void PlistDump(PLIST plist, FILE *output);
 
 
