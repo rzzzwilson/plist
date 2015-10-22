@@ -10,4 +10,44 @@ strings for the name and anything as the value.
 Usage
 -----
 
-usage
+To create your *PLIST*, do:
+
+::
+
+    #include "plist.h"
+
+    PLIST my_plist = PlistCreate();
+
+Now when you want to add a name/value pair to *my_plist*, do:
+
+::
+    
+    PListInsert(my_plist, "abc", "abc-value");
+
+This adds the value "abc-value" to the *PLIST* with the name of "abc".
+
+To retrieve a value from a *PLIST* just use the key on the *PLIST*:
+
+::
+
+    char *value = PlistFind(my_plist, "abc");
+
+This should return the value "abc-value".  If the key is not found the
+returned value is *NULL*.
+
+If you place two values in a plist with the same key, PlistFind() will 
+return only the latest added.
+
+::
+
+    #include "plist.h"
+
+    PLIST my_plist = PlistCreate();
+    char *value;
+
+    PListInsert(my_plist, "abc", "abc-value");
+    PListInsert(my_plist, "abc", "abc2-value");
+
+    value = PlistFind(my_plist, "abc");
+
+In the above example the returned value will be "abc2-value".
