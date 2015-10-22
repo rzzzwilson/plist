@@ -55,6 +55,24 @@ void test_destroy(void)
 }
 
 /*
+ * More complicated test of PListDestroy().
+ */
+void test_destroy2(void)
+{
+    PLIST my_plist = NULL;
+
+    my_plist = PlistCreate();
+    CU_ASSERT(my_plist != NULL);
+
+    PListInsert(my_plist, "abc", "abc-value");
+    PListInsert(my_plist, "abc", "abc2-value");
+    PListInsert(my_plist, "abc", "abc3-value");
+
+    my_plist = PlistDestroy(my_plist);
+    CU_ASSERT(NULL == my_plist);
+}
+
+/*
  * Simple test of PListInsert().
  */
 void test_insert1(void)
@@ -120,6 +138,9 @@ void test_find3(void)
     value = PlistFind(my_plist, "abc");
     CU_ASSERT(value != NULL);
     CU_ASSERT(strcmp(value, "abc3-value") == 0);
+#ifdef DEBUG
+    PlistDump(my_plist, NULL);
+#endif
 }
 
 /*
@@ -152,6 +173,12 @@ int main()
     }
 
     if ((NULL == CU_add_test(create_suite, "test PlistDestroy", test_destroy)))
+    {
+        CU_cleanup_registry();
+        return CU_get_error();
+    }
+
+    if ((NULL == CU_add_test(create_suite, "test PlistDestroy", test_destroy2)))
     {
         CU_cleanup_registry();
         return CU_get_error();

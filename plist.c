@@ -164,6 +164,7 @@ PlistDestroy(PLIST plist)
 }
 
 
+#ifdef DEBUG
 /******************************************************************************
        Name : PlistDump()
 Description : Dump the plist to a specified open output FILE.
@@ -183,6 +184,12 @@ PlistDump(PLIST plist, FILE *output)
     while (hdr->next)
     {
         hdr = hdr->next;
-        fprintf(output, "%s: %s\n", hdr->name, hdr->value);
+        fprintf(output, "\n address: %p\n", hdr);
+        fprintf(output, "----------------+-----------------\n");
+        fprintf(output, " %p | %s\n", hdr->name, hdr->name);
+        fprintf(output, " %p | %s\n", hdr->value, hdr->value);
+        fprintf(output, "----------------+-----------------\n");
+        fprintf(output, " next: %p\n", hdr->next);
     }
 }
+#endif
