@@ -24,7 +24,7 @@ Now when you want to add a name/value pair to *my_plist*, do:
     
     PListInsert(my_plist, "abc", "abc-value");
 
-This adds the value "abc-value" to the *PLIST* with the name of "abc".
+This adds the value "abc-value" under the key "abc" to the *PLIST*.
 
 To retrieve a value from a *PLIST* just use the key on the *PLIST*:
 
