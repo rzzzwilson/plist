@@ -64,16 +64,16 @@ void test_destroy2(void)
     my_plist = PlistCreate();
     CU_ASSERT(my_plist != NULL);
 
-    PListInsert(my_plist, "abc", "abc-value");
-    PListInsert(my_plist, "abc", "abc2-value");
-    PListInsert(my_plist, "abc", "abc3-value");
+    PlistInsert(my_plist, "abc", "abc-value");
+    PlistInsert(my_plist, "abc", "abc2-value");
+    PlistInsert(my_plist, "abc", "abc3-value");
 
     my_plist = PlistDestroy(my_plist);
     CU_ASSERT(NULL == my_plist);
 }
 
 /*
- * Simple test of PListInsert().
+ * Simple test of PlistInsert().
  */
 void test_insert1(void)
 {
@@ -83,7 +83,7 @@ void test_insert1(void)
 
     CU_ASSERT(my_plist != NULL);
 
-    PListInsert(my_plist, "abc", "abc-value");
+    PlistInsert(my_plist, "abc", "abc-value");
 }
 
 /*
@@ -96,7 +96,7 @@ void test_find1(void)
     my_plist = PlistCreate();
     CU_ASSERT(my_plist != NULL);
 
-    PListInsert(my_plist, "abc", "abc-value");
+    PlistInsert(my_plist, "abc", "abc-value");
 
     char *value = NULL;
     value = PlistFind(my_plist, "abc");
@@ -113,7 +113,7 @@ void test_find2(void)
     my_plist = PlistCreate();
     CU_ASSERT(my_plist != NULL);
 
-    PListInsert(my_plist, "abc", "abc-value");
+    PlistInsert(my_plist, "abc", "abc-value");
 
     char *value = NULL;
     value = PlistFind(my_plist, "xyz");
@@ -130,9 +130,9 @@ void test_find3(void)
     my_plist = PlistCreate();
     CU_ASSERT(my_plist != NULL);
 
-    PListInsert(my_plist, "abc", "abc-value");
-    PListInsert(my_plist, "abc", "abc2-value");
-    PListInsert(my_plist, "abc", "abc3-value");
+    PlistInsert(my_plist, "abc", "abc-value");
+    PlistInsert(my_plist, "abc", "abc2-value");
+    PlistInsert(my_plist, "abc", "abc3-value");
 
     char *value = NULL;
     value = PlistFind(my_plist, "abc");
@@ -185,7 +185,7 @@ int main()
     }
 
     /* add a suite to the registry */
-    insert_suite = CU_add_suite("Check PListInsert", init_suite, clean_suite);
+    insert_suite = CU_add_suite("Check PlistInsert", init_suite, clean_suite);
     if (NULL == insert_suite)
     {
         CU_cleanup_registry();
